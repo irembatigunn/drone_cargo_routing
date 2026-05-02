@@ -1,0 +1,160 @@
+{
+  "id": "small",
+  "name": "small",
+  "canvas_width": 1000,
+  "canvas_height": 1000,
+  "depot": {
+    "x": 500.0,
+    "y": 500.0
+  },
+  "delivery_points": [
+    {
+      "id": "pkg_001",
+      "position": {
+        "x": 337.20799408734155,
+        "y": 828.6415401172713
+      },
+      "weight_kg": 1.5305256140650478,
+      "priority": "low",
+      "time_window_open_min": 33,
+      "time_window_close_min": 124,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_002",
+      "position": {
+        "x": 264.6423000528417,
+        "y": 654.1768608006555
+      },
+      "weight_kg": 1.4377124707590272,
+      "priority": "med",
+      "time_window_open_min": 25,
+      "time_window_close_min": 106,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_003",
+      "position": {
+        "x": 329.25851082633295,
+        "y": 759.1167680425102
+      },
+      "weight_kg": 2.0675282046879238,
+      "priority": "med",
+      "time_window_open_min": 8,
+      "time_window_close_min": 78,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_004",
+      "position": {
+        "x": 366.43722740664333,
+        "y": 160.20642239747934
+      },
+      "weight_kg": 1.7083062502067232,
+      "priority": "med",
+      "time_window_open_min": 79,
+      "time_window_close_min": 108,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_005",
+      "position": {
+        "x": 523.7477442888086,
+        "y": 116.79207519382415
+      },
+      "weight_kg": 2.2088635950047553,
+      "priority": "med",
+      "time_window_open_min": 33,
+      "time_window_close_min": 139,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_006",
+      "position": {
+        "x": 328.992691770001,
+        "y": 253.94379129147444
+      },
+      "weight_kg": 2.1713682811899706,
+      "priority": "low",
+      "time_window_open_min": 35,
+      "time_window_close_min": 61,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_007",
+      "position": {
+        "x": 501.7338027116027,
+        "y": 606.6047183107005
+      },
+      "weight_kg": 1.5393612290402126,
+      "priority": "low",
+      "time_window_open_min": 97,
+      "time_window_close_min": 133,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_008",
+      "position": {
+        "x": 679.2288978726467,
+        "y": 609.609272876913
+      },
+      "weight_kg": 2.6116762888408678,
+      "priority": "low",
+      "time_window_open_min": 146,
+      "time_window_close_min": 249,
+      "service_time_min": 2
+    }
+  ],
+  "no_fly_zones": [
+    {
+      "id": "zone_001",
+      "polygon": [
+        {
+          "x": 812.187517803297,
+          "y": 144.49625622970706
+        },
+        {
+          "x": 713.337745749879,
+          "y": 233.76135836125144
+        },
+        {
+          "x": 644.3333749271004,
+          "y": 172.05495574121326
+        },
+        {
+          "x": 710.667545766229,
+          "y": 68.5924772708647
+        }
+      ]
+    },
+    {
+      "id": "zone_002",
+      "polygon": [
+        {
+          "x": 706.6676848947393,
+          "y": 794.9534834730607
+        },
+        {
+          "x": 600.5665161514457,
+          "y": 900.3146165586437
+        },
+        {
+          "x": 522.5038470761147,
+          "y": 800.2444452517086
+        },
+        {
+          "x": 610.8200887252564,
+          "y": 724.6410739522049
+        }
+      ]
+    }
+  ],
+  "drone_fleet": {
+    "count": 3,
+    "max_payload_kg": 5.0,
+    "max_range_per_trip": 800.0,
+    "speed_units_per_min": 100.0,
+    "recharge_time_min": 10
+  },
+  "seed": 42
+}

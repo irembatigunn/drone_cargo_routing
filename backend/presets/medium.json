@@ -1,0 +1,322 @@
+{
+  "id": "medium",
+  "name": "medium",
+  "canvas_width": 1000,
+  "canvas_height": 1000,
+  "depot": {
+    "x": 500.0,
+    "y": 500.0
+  },
+  "delivery_points": [
+    {
+      "id": "pkg_001",
+      "position": {
+        "x": 632.9815010306588,
+        "y": 509.5879651208004
+      },
+      "weight_kg": 2.8010652157115112,
+      "priority": "med",
+      "time_window_open_min": 0,
+      "time_window_close_min": 90,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_002",
+      "position": {
+        "x": 733.4161141967704,
+        "y": 460.9933845138758
+      },
+      "weight_kg": 1.1937645392879546,
+      "priority": "high",
+      "time_window_open_min": 150,
+      "time_window_close_min": 242,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_003",
+      "position": {
+        "x": 750.9179763386691,
+        "y": 432.9148674250554
+      },
+      "weight_kg": 0.5,
+      "priority": "med",
+      "time_window_open_min": 97,
+      "time_window_close_min": 196,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_004",
+      "position": {
+        "x": 676.3387340217612,
+        "y": 455.1014358229071
+      },
+      "weight_kg": 2.216010275920184,
+      "priority": "med",
+      "time_window_open_min": 138,
+      "time_window_close_min": 158,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_005",
+      "position": {
+        "x": 537.3283511134393,
+        "y": 482.1224252069849
+      },
+      "weight_kg": 0.8966218186392807,
+      "priority": "high",
+      "time_window_open_min": 17,
+      "time_window_close_min": 81,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_006",
+      "position": {
+        "x": 353.0277441651029,
+        "y": 163.05187590696002
+      },
+      "weight_kg": 1.7104955851238284,
+      "priority": "low",
+      "time_window_open_min": 18,
+      "time_window_close_min": 117,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_007",
+      "position": {
+        "x": 470.774512863437,
+        "y": 265.1713989683766
+      },
+      "weight_kg": 1.0473599758025895,
+      "priority": "low",
+      "time_window_open_min": 149,
+      "time_window_close_min": 226,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_008",
+      "position": {
+        "x": 415.8699331017635,
+        "y": 108.578871280655
+      },
+      "weight_kg": 2.002793726954714,
+      "priority": "med",
+      "time_window_open_min": 108,
+      "time_window_close_min": 195,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_009",
+      "position": {
+        "x": 445.5581620892708,
+        "y": 275.61527706695955
+      },
+      "weight_kg": 1.5150645419048026,
+      "priority": "low",
+      "time_window_open_min": 97,
+      "time_window_close_min": 192,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_010",
+      "position": {
+        "x": 493.31959126570763,
+        "y": 262.73594593076854
+      },
+      "weight_kg": 0.5136586790753905,
+      "priority": "low",
+      "time_window_open_min": 82,
+      "time_window_close_min": 160,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_011",
+      "position": {
+        "x": 167.2299410983265,
+        "y": 502.7564856255632
+      },
+      "weight_kg": 1.8480565826799764,
+      "priority": "high",
+      "time_window_open_min": 17,
+      "time_window_close_min": 120,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_012",
+      "position": {
+        "x": 362.78405858487884,
+        "y": 493.1623018558208
+      },
+      "weight_kg": 2.542885305807739,
+      "priority": "high",
+      "time_window_open_min": 67,
+      "time_window_close_min": 102,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_013",
+      "position": {
+        "x": 226.04884491098022,
+        "y": 447.3630478606622
+      },
+      "weight_kg": 3.0125555746736916,
+      "priority": "low",
+      "time_window_open_min": 127,
+      "time_window_close_min": 156,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_014",
+      "position": {
+        "x": 230.15470745464648,
+        "y": 462.31491162096785
+      },
+      "weight_kg": 1.9554307713118855,
+      "priority": "med",
+      "time_window_open_min": 152,
+      "time_window_close_min": 219,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_015",
+      "position": {
+        "x": 622.7901192760977,
+        "y": 495.6257270150238
+      },
+      "weight_kg": 1.7060505760355886,
+      "priority": "low",
+      "time_window_open_min": 96,
+      "time_window_close_min": 214,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_016",
+      "position": {
+        "x": 670.8652604222598,
+        "y": 388.47992308785604
+      },
+      "weight_kg": 0.8563235876306665,
+      "priority": "med",
+      "time_window_open_min": 100,
+      "time_window_close_min": 128,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_017",
+      "position": {
+        "x": 669.2003739861723,
+        "y": 399.8160806119504
+      },
+      "weight_kg": 2.117557287715559,
+      "priority": "low",
+      "time_window_open_min": 153,
+      "time_window_close_min": 239,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_018",
+      "position": {
+        "x": 490.6231007325518,
+        "y": 318.0031286352484
+      },
+      "weight_kg": 0.6761090145034465,
+      "priority": "low",
+      "time_window_open_min": 82,
+      "time_window_close_min": 143,
+      "service_time_min": 2
+    }
+  ],
+  "no_fly_zones": [
+    {
+      "id": "zone_001",
+      "polygon": [
+        {
+          "x": 667.9880318812652,
+          "y": 788.8951806034395
+        },
+        {
+          "x": 585.0545191364608,
+          "y": 868.3047593382208
+        },
+        {
+          "x": 498.72376046676874,
+          "y": 763.746063019745
+        },
+        {
+          "x": 588.6837990000945,
+          "y": 701.646421951383
+        }
+      ]
+    },
+    {
+      "id": "zone_002",
+      "polygon": [
+        {
+          "x": 201.94563005086704,
+          "y": 166.27090936001082
+        },
+        {
+          "x": 135.07238274181364,
+          "y": 210.71219676756175
+        },
+        {
+          "x": 73.72331671592096,
+          "y": 159.57717925954847
+        },
+        {
+          "x": 134.8874755739895,
+          "y": 77.82605886285042
+        }
+      ]
+    },
+    {
+      "id": "zone_003",
+      "polygon": [
+        {
+          "x": 971.8543528195273,
+          "y": 327.4257387147608
+        },
+        {
+          "x": 876.9230384794955,
+          "y": 416.36230243513177
+        },
+        {
+          "x": 734.6305057057729,
+          "y": 333.4464239449494
+        },
+        {
+          "x": 850.877235250537,
+          "y": 168.92695797271142
+        }
+      ]
+    },
+    {
+      "id": "zone_004",
+      "polygon": [
+        {
+          "x": 749.4811616549131,
+          "y": 861.2449775104719
+        },
+        {
+          "x": 633.7061184574477,
+          "y": 924.8577723706219
+        },
+        {
+          "x": 560.5369128914951,
+          "y": 834.6171805451404
+        },
+        {
+          "x": 646.8371470778877,
+          "y": 734.9761111481752
+        }
+      ]
+    }
+  ],
+  "drone_fleet": {
+    "count": 4,
+    "max_payload_kg": 5.0,
+    "max_range_per_trip": 800.0,
+    "speed_units_per_min": 100.0,
+    "recharge_time_min": 10
+  },
+  "seed": 137
+}
