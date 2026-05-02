@@ -2,3 +2,8 @@ fastapi
 uvicorn[standard]
 pydantic
 numpy
+networkx
+shapely
+scipy
+websockets
+pytest
