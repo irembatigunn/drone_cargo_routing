@@ -1,0 +1,335 @@
+{
+  "id": "medium",
+  "name": "medium",
+  "canvas_width": 1000,
+  "canvas_height": 1000,
+  "depot": {
+    "x": 500.0,
+    "y": 500.0
+  },
+  "delivery_points": [
+    {
+      "id": "pkg_001",
+      "position": {
+        "x": 729.42,
+        "y": 474.08
+      },
+      "weight_kg": 2.8,
+      "priority": "low",
+      "time_window_open_min": 137,
+      "time_window_close_min": 157,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_002",
+      "position": {
+        "x": 829.85,
+        "y": 407.32
+      },
+      "weight_kg": 3.13,
+      "priority": "low",
+      "time_window_open_min": 19,
+      "time_window_close_min": 117,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_003",
+      "position": {
+        "x": 766.77,
+        "y": 476.52
+      },
+      "weight_kg": 3.28,
+      "priority": "low",
+      "time_window_open_min": 95,
+      "time_window_close_min": 169,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_004",
+      "position": {
+        "x": 726.49,
+        "y": 679.98
+      },
+      "weight_kg": 4.02,
+      "priority": "high",
+      "time_window_open_min": 64,
+      "time_window_close_min": 163,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_005",
+      "position": {
+        "x": 748.68,
+        "y": 660.7
+      },
+      "weight_kg": 3.47,
+      "priority": "high",
+      "time_window_open_min": 21,
+      "time_window_close_min": 83,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_006",
+      "position": {
+        "x": 761.21,
+        "y": 521.37
+      },
+      "weight_kg": 2.59,
+      "priority": "low",
+      "time_window_open_min": 62,
+      "time_window_close_min": 133,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_007",
+      "position": {
+        "x": 686.73,
+        "y": 633.91
+      },
+      "weight_kg": 1.56,
+      "priority": "med",
+      "time_window_open_min": 4,
+      "time_window_close_min": 70,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_008",
+      "position": {
+        "x": 713.84,
+        "y": 725.73
+      },
+      "weight_kg": 3.02,
+      "priority": "low",
+      "time_window_open_min": 114,
+      "time_window_close_min": 182,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_009",
+      "position": {
+        "x": 820.04,
+        "y": 625.95
+      },
+      "weight_kg": 0.5,
+      "priority": "low",
+      "time_window_open_min": 90,
+      "time_window_close_min": 159,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_010",
+      "position": {
+        "x": 402.3,
+        "y": 273.92
+      },
+      "weight_kg": 3.47,
+      "priority": "low",
+      "time_window_open_min": 44,
+      "time_window_close_min": 131,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_011",
+      "position": {
+        "x": 429.42,
+        "y": 230.46
+      },
+      "weight_kg": 1.52,
+      "priority": "low",
+      "time_window_open_min": 30,
+      "time_window_close_min": 122,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_012",
+      "position": {
+        "x": 477.18,
+        "y": 182.5
+      },
+      "weight_kg": 0.56,
+      "priority": "med",
+      "time_window_open_min": 56,
+      "time_window_close_min": 153,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_013",
+      "position": {
+        "x": 367.82,
+        "y": 82.03
+      },
+      "weight_kg": 1.62,
+      "priority": "med",
+      "time_window_open_min": 16,
+      "time_window_close_min": 84,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_014",
+      "position": {
+        "x": 426.55,
+        "y": 91.71
+      },
+      "weight_kg": 2.03,
+      "priority": "low",
+      "time_window_open_min": 123,
+      "time_window_close_min": 152,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_015",
+      "position": {
+        "x": 565.15,
+        "y": 301.94
+      },
+      "weight_kg": 1.89,
+      "priority": "low",
+      "time_window_open_min": 178,
+      "time_window_close_min": 260,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_016",
+      "position": {
+        "x": 484.77,
+        "y": 350.26
+      },
+      "weight_kg": 1.74,
+      "priority": "med",
+      "time_window_open_min": 12,
+      "time_window_close_min": 102,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_017",
+      "position": {
+        "x": 517.64,
+        "y": 342.02
+      },
+      "weight_kg": 2.3,
+      "priority": "low",
+      "time_window_open_min": 20,
+      "time_window_close_min": 108,
+      "service_time_min": 2
+    },
+    {
+      "id": "pkg_018",
+      "position": {
+        "x": 407.02,
+        "y": 297.82
+      },
+      "weight_kg": 1.96,
+      "priority": "med",
+      "time_window_open_min": 98,
+      "time_window_close_min": 208,
+      "service_time_min": 2
+    }
+  ],
+  "no_fly_zones": [
+    {
+      "id": "nfz_01",
+      "polygon": [
+        {
+          "x": 388.08,
+          "y": 170.86
+        },
+        {
+          "x": 381.15,
+          "y": 260.78
+        },
+        {
+          "x": 245.59,
+          "y": 260.71
+        },
+        {
+          "x": 182.13,
+          "y": 185.81
+        },
+        {
+          "x": 286.2,
+          "y": 102.29
+        },
+        {
+          "x": 348.87,
+          "y": 88.78
+        }
+      ]
+    },
+    {
+      "id": "nfz_02",
+      "polygon": [
+        {
+          "x": 138.36,
+          "y": 560.09
+        },
+        {
+          "x": 228.01,
+          "y": 467.5
+        },
+        {
+          "x": 326.2,
+          "y": 569.29
+        },
+        {
+          "x": 245.79,
+          "y": 661.24
+        }
+      ]
+    },
+    {
+      "id": "nfz_03",
+      "polygon": [
+        {
+          "x": 519.22,
+          "y": 818.87
+        },
+        {
+          "x": 582.03,
+          "y": 701.59
+        },
+        {
+          "x": 676.68,
+          "y": 794.44
+        },
+        {
+          "x": 621.93,
+          "y": 897.99
+        }
+      ]
+    },
+    {
+      "id": "nfz_04",
+      "polygon": [
+        {
+          "x": 339.26,
+          "y": 770.36
+        },
+        {
+          "x": 326.5,
+          "y": 688.38
+        },
+        {
+          "x": 384.41,
+          "y": 655.74
+        },
+        {
+          "x": 447.61,
+          "y": 711.88
+        },
+        {
+          "x": 382.54,
+          "y": 766.34
+        }
+      ]
+    }
+  ],
+  "drone_fleet": {
+    "count": 4,
+    "max_payload_kg": 5.0,
+    "max_range_per_trip": 800.0,
+    "speed_units_per_min": 100.0,
+    "recharge_time_min": 10
+  },
+  "simulation_horizon_min": 240,
+  "seed": 137
+}

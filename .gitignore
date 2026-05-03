@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+backend/saved_runs/
+backend/.env
+
+node_modules/
+dist/
+.vite/
+
+docs/benchmark_results.json
+*.log
