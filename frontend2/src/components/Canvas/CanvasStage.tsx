@@ -163,15 +163,47 @@ export function CanvasStage({ width, height }: Props) {
             {activeSolution.routes.map((route, di) => {
               const color = DRONE_COLORS[di % DRONE_COLORS.length]
               const isHighlighted = !visualization.highlightedDroneId || visualization.highlightedDroneId === route.drone_id
-              return route.trips.map((trip, ti) => {
-                const allPositions: [number, number][] = [depotScreen]
-                for (const pkgId of trip.sequence) {
-                  const dp = scenario.delivery_points.find(d => d.id === pkgId)
-                  if (dp) allPositions.push(scalePos(dp.position, scaleX, scaleY))
-                }
-                allPositions.push(depotScreen)
 
-                const flatPoints = allPositions.flatMap(([x, y]) => [x, y])
+              // Helper: get NFZ-aware path points between two nodes
+              const getSegPath = (from: string, to: string): [number, number][] => {
+                if (graphData?.paths) {
+                  const key = `${from}::${to}`
+                  const revKey = `${to}::${from}`
+                  const pts = graphData.paths[key] || graphData.paths[revKey]
+                  if (pts && pts.length >= 2) {
+                    return pts.map(p => scalePos(p, scaleX, scaleY) as [number, number])
+                  }
+                }
+                // Fallback: straight line
+                const fromPos = from === 'depot' ? scenario.depot
+                  : scenario.delivery_points.find(d => d.id === from)?.position
+                const toPos = to === 'depot' ? scenario.depot
+                  : scenario.delivery_points.find(d => d.id === to)?.position
+                if (fromPos && toPos) {
+                  return [scalePos(fromPos, scaleX, scaleY) as [number, number], scalePos(toPos, scaleX, scaleY) as [number, number]]
+                }
+                return []
+              }
+
+              return route.trips.map((trip, ti) => {
+                // Build full route polyline by concatenating path segments
+                const flatPoints: number[] = []
+
+                const stops = ['depot', ...trip.sequence, 'depot']
+                for (let si = 0; si < stops.length - 1; si++) {
+                  const seg = getSegPath(stops[si], stops[si + 1])
+                  if (seg.length === 0) continue
+                  if (flatPoints.length === 0) {
+                    // First segment: add all points
+                    seg.forEach(([x, y]) => flatPoints.push(x, y))
+                  } else {
+                    // Skip first point (shared with last point of previous segment)
+                    seg.slice(1).forEach(([x, y]) => flatPoints.push(x, y))
+                  }
+                }
+
+                if (flatPoints.length < 4) return null
+
                 const dashPattern = ti === 0 ? [] : ti === 1 ? [8, 4] : [2, 4]
 
                 return (
@@ -183,17 +215,22 @@ export function CanvasStage({ width, height }: Props) {
                       dash={dashPattern}
                       opacity={isHighlighted ? 0.85 : 0.3}
                     />
-                    {/* Trip number label */}
-                    {visualization.showTripNumbers && allPositions.length > 2 && (
-                      <Text
-                        x={allPositions[1][0] + 6}
-                        y={allPositions[1][1] - 12}
-                        text={`D${di + 1}T${ti + 1}`}
-                        fontSize={8}
-                        fill={color}
-                        fontFamily="Space Mono, monospace"
-                      />
-                    )}
+                    {/* Trip number label at first delivery point */}
+                    {visualization.showTripNumbers && trip.sequence.length > 0 && (() => {
+                      const firstDp = scenario.delivery_points.find(d => d.id === trip.sequence[0])
+                      if (!firstDp) return null
+                      const [lx, ly] = scalePos(firstDp.position, scaleX, scaleY)
+                      return (
+                        <Text
+                          x={lx + 6}
+                          y={ly - 12}
+                          text={`D${di + 1}T${ti + 1}`}
+                          fontSize={8}
+                          fill={color}
+                          fontFamily="Space Mono, monospace"
+                        />
+                      )
+                    })()}
                   </React.Fragment>
                 )
               })

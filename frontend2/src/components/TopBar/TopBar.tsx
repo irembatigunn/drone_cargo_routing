@@ -7,7 +7,7 @@ import { useAnimation } from '../../hooks/useAnimation'
 
 export function TopBar() {
   const {
-    scenario, gaConfig, weights, seed, isRunning, solutions,
+    scenario, gaConfig, weights, seed, isRunning, solutions, selectedAlgos,
     setIsRunning, setCurrentRun, updateRunProgress, completeRun, setSolution,
     animation, setAnimation, visualization,
   } = useAppStore()
@@ -30,17 +30,46 @@ export function TopBar() {
 
   const runOptimization = async () => {
     if (!scenario || isRunning) return
+
+    const anySelected = selectedAlgos.random || selectedAlgos.nn || selectedAlgos.ga
+    if (!anySelected) {
+      setStatus('No algorithm selected')
+      return
+    }
+
     setIsRunning(true)
-    setStatus('Running Random & NN...')
+    setStatus('Starting...')
 
     try {
-      // Run Random and NN in parallel
-      const [randSol, nnSol] = await Promise.all([
-        optimizationApi.runRandom(scenario.id, seed, weights),
-        optimizationApi.runNN(scenario.id, weights),
-      ])
-      setSolution('random', randSol)
-      setSolution('nn', nnSol)
+      // Run Random and NN in parallel (only if selected)
+      const promises: Promise<void>[] = []
+
+      if (selectedAlgos.random) {
+        promises.push(
+          optimizationApi.runRandom(scenario.id, seed, weights).then(sol => {
+            setSolution('random', sol)
+            setStatus(s => s.includes('GA') ? s : 'Random done')
+          })
+        )
+      }
+      if (selectedAlgos.nn) {
+        promises.push(
+          optimizationApi.runNN(scenario.id, weights).then(sol => {
+            setSolution('nn', sol)
+          })
+        )
+      }
+
+      if (promises.length > 0) {
+        setStatus('Running baselines...')
+        await Promise.all(promises)
+      }
+
+      if (!selectedAlgos.ga) {
+        setStatus('Done')
+        setIsRunning(false)
+        return
+      }
 
       setStatus('Starting GA...')
 

@@ -236,3 +236,35 @@ async def websocket_ga(websocket: WebSocket, run_id: str):
             await websocket.close()
         except Exception:
             pass
+
+
+class BatchGARequest(BaseModel):
+    scenario_id: str
+    ga_params: Optional[GAConfig] = None
+    weights: Optional[FitnessWeights] = None
+    seed: int = 42
+    n_runs: int = 30
+
+
+@router.post("/optimize/batch_ga")
+def batch_ga(req: BatchGARequest) -> dict:
+    """
+    Run GA n_runs times with different seeds (PRD §5.4.3 comparison protocol).
+    Returns mean ± std for total_distance, total_time_min, time_window_violations, fitness.
+    Single-threaded; n_runs=30 may take a few minutes for large scenarios.
+    """
+    from app.core.evaluation import run_ga_batch
+
+    scenario = _find_scenario(req.scenario_id)
+    if not scenario:
+        raise HTTPException(404, "Scenario not found")
+
+    graph_data = get_graph_data_for_scenario(scenario)
+    dist_matrix = graph_data["distance_matrix"]
+
+    config = req.ga_params or GAConfig(seed=req.seed)
+    config.seed = req.seed
+    weights = req.weights or FitnessWeights()
+
+    stats = run_ga_batch(scenario, dist_matrix, config, weights, n_runs=req.n_runs)
+    return stats

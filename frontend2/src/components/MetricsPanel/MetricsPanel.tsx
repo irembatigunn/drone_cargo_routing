@@ -178,6 +178,14 @@ export function MetricsPanel() {
                 nn: solutions.nn ? solutions.nn.fitness.toFixed(0) : '—',
                 ga: solutions.ga ? solutions.ga.fitness.toFixed(0) : '—',
               }} />
+              <KPIRow label="Compute (s)" values={{
+                random: solutions.random?.metadata?.compute_time_seconds != null
+                  ? Number(solutions.random.metadata.compute_time_seconds).toFixed(3) : '—',
+                nn: solutions.nn?.metadata?.compute_time_seconds != null
+                  ? Number(solutions.nn.metadata.compute_time_seconds).toFixed(3) : '—',
+                ga: solutions.ga?.metadata?.compute_time_seconds != null
+                  ? Number(solutions.ga.metadata.compute_time_seconds).toFixed(2) : '—',
+              }} />
             </tbody>
           </table>
         </div>

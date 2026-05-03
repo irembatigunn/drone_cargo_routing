@@ -68,9 +68,9 @@ function Toggle({ label, value, onChange }: { label: string; value: boolean; onC
 
 export function ConfigPanel() {
   const {
-    gaConfig, weights, seed, visualization,
+    gaConfig, weights, seed, visualization, selectedAlgos,
     setGAConfig, setWeights, setSeed, setVisualization,
-    setActivePreset, activePreset, setScenario, setGraphData,
+    setSelectedAlgos, setActivePreset, activePreset, setScenario, setGraphData,
     setVisibilityEdges, resetRun,
   } = useAppStore()
 
@@ -161,6 +161,31 @@ export function ConfigPanel() {
             Loading...
           </div>
         )}
+      </Section>
+
+      {/* Algorithm Selection */}
+      <Section title="Algorithms" defaultOpen>
+        {([
+          { key: 'random' as const, label: 'Random Assignment' },
+          { key: 'nn' as const, label: 'Nearest Neighbor' },
+          { key: 'ga' as const, label: 'Genetic Algorithm' },
+        ]).map(({ key, label }) => (
+          <div key={key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 10 }}>
+            <span style={{ color: selectedAlgos[key] ? '#e2e8f0' : '#475569', fontSize: 10, fontFamily: 'Space Mono, monospace' }}>{label}</span>
+            <button
+              onClick={() => setSelectedAlgos({ [key]: !selectedAlgos[key] })}
+              style={{
+                width: 36, height: 20, borderRadius: 10, border: 'none', cursor: 'pointer',
+                background: selectedAlgos[key] ? '#38bdf8' : '#1e293b', position: 'relative', transition: 'background 0.2s',
+              }}
+            >
+              <div style={{
+                width: 14, height: 14, borderRadius: '50%', background: 'white',
+                position: 'absolute', top: 3, left: selectedAlgos[key] ? 19 : 3, transition: 'left 0.2s',
+              }} />
+            </button>
+          </div>
+        ))}
       </Section>
 
       {/* GA Params */}

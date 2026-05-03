@@ -47,6 +47,9 @@ interface AppState {
   weights: FitnessWeights
   seed: number
 
+  // Algorithm selection (which algos to run)
+  selectedAlgos: { random: boolean; nn: boolean; ga: boolean }
+
   // Visualization toggles
   visualization: {
     showVisibilityGraph: boolean
@@ -76,6 +79,7 @@ interface AppState {
   setGAConfig: (c: Partial<GAConfig>) => void
   setWeights: (w: Partial<FitnessWeights>) => void
   setSeed: (s: number) => void
+  setSelectedAlgos: (a: Partial<{ random: boolean; nn: boolean; ga: boolean }>) => void
   setVisualization: (v: Partial<AppState['visualization']>) => void
   setAnimation: (a: Partial<AnimationState>) => void
   setIsRunning: (b: boolean) => void
@@ -112,6 +116,8 @@ export const useAppStore = create<AppState>((set, get) => ({
   },
 
   seed: 42,
+
+  selectedAlgos: { random: true, nn: true, ga: true },
 
   visualization: {
     showVisibilityGraph: false,
@@ -159,6 +165,7 @@ export const useAppStore = create<AppState>((set, get) => ({
   setGAConfig: (c) => set((state) => ({ gaConfig: { ...state.gaConfig, ...c } })),
   setWeights: (w) => set((state) => ({ weights: { ...state.weights, ...w } })),
   setSeed: (s) => set({ seed: s }),
+  setSelectedAlgos: (a) => set((state) => ({ selectedAlgos: { ...state.selectedAlgos, ...a } })),
   setVisualization: (v) => set((state) => ({ visualization: { ...state.visualization, ...v } })),
   setAnimation: (a) => set((state) => ({ animation: { ...state.animation, ...a } })),
   setIsRunning: (b) => set({ isRunning: b }),
