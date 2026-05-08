@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { useAppStore } from '../../store/appStore'
 import { optimizationApi, scenarioApi } from '../../api/client'
 import { useWebSocket } from '../../hooks/useWebSocket'
@@ -14,6 +14,8 @@ export function TopBar() {
 
   const { connect, cancel } = useWebSocket()
   const [status, setStatus] = useState<string>('')
+  const isRunningRef = useRef(isRunning)
+  isRunningRef.current = isRunning
 
   const graphData = useAppStore(s => s.graphData)
   const paths = graphData?.paths
@@ -98,7 +100,10 @@ export function TopBar() {
           setIsRunning(false)
         }
       }, () => {
-        if (isRunning) setIsRunning(false)
+        if (isRunningRef.current) setIsRunning(false)
+      }, () => {
+        setStatus('WebSocket connection failed — check backend')
+        setIsRunning(false)
       })
     } catch (e) {
       console.error(e)

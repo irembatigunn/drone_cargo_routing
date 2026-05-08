@@ -33,10 +33,14 @@ function formatSol(sol: Solution | undefined, key: keyof Solution) {
 }
 
 export function MetricsPanel() {
-  const { currentRun, solutions, scenario } = useAppStore()
+  const { currentRun, solutions, scenario, gaConfig } = useAppStore()
 
   const history = currentRun?.history || []
   const lastHistory = history[history.length - 1]
+
+  // Use live best-so-far GA solution during a run, final solution after completion
+  const gaSolution = solutions.ga || currentRun?.currentGenSolution || undefined
+  const isLiveGA = !solutions.ga && !!currentRun?.currentGenSolution
 
   const mc = (sol?: Solution) => sol?.metadata?.monte_carlo?.expected_success_rate
     ? `${(sol.metadata.monte_carlo.expected_success_rate * 100).toFixed(1)}%`
@@ -60,7 +64,7 @@ export function MetricsPanel() {
           <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 6 }}>
             <span style={{ color: '#64748b', fontFamily: 'Space Mono', fontSize: 9 }}>GENERATION</span>
             <span style={{ color: '#e2e8f0', fontFamily: 'Space Mono', fontSize: 10 }}>
-              {history.length} / —
+              {history.length} / {gaConfig.generations}
             </span>
           </div>
           <div style={{ height: 4, background: '#1e293b', borderRadius: 2, overflow: 'hidden' }}>
@@ -133,7 +137,7 @@ export function MetricsPanel() {
       )}
 
       {/* KPI Comparison Table */}
-      {(solutions.random || solutions.nn || solutions.ga) && (
+      {(solutions.random || solutions.nn || gaSolution) && (
         <div style={{ padding: '10px 12px' }}>
           <div style={{ color: '#64748b', fontFamily: 'Space Mono', fontSize: 9, marginBottom: 8 }}>COMPARISON</div>
           <table style={{ width: '100%', borderCollapse: 'collapse' }}>
@@ -143,6 +147,9 @@ export function MetricsPanel() {
                 {(['random', 'nn', 'ga'] as const).map(a => (
                   <th key={a} style={{ padding: '4px 8px', color: '#38bdf8', fontFamily: 'Space Mono', fontSize: 8, textAlign: 'right' }}>
                     {a.toUpperCase()}
+                    {a === 'ga' && isLiveGA && (
+                      <span style={{ color: '#f59e0b', fontSize: 7, marginLeft: 2 }}> LIVE</span>
+                    )}
                   </th>
                 ))}
               </tr>
@@ -151,40 +158,41 @@ export function MetricsPanel() {
               <KPIRow label="Dist" values={{
                 random: formatSol(solutions.random, 'total_distance'),
                 nn: formatSol(solutions.nn, 'total_distance'),
-                ga: formatSol(solutions.ga, 'total_distance'),
+                ga: formatSol(gaSolution, 'total_distance'),
               }} />
               <KPIRow label="Time (min)" values={{
                 random: formatSol(solutions.random, 'total_time_min'),
                 nn: formatSol(solutions.nn, 'total_time_min'),
-                ga: formatSol(solutions.ga, 'total_time_min'),
+                ga: formatSol(gaSolution, 'total_time_min'),
               }} />
               <KPIRow label="TW Viol." values={{
                 random: formatSol(solutions.random, 'time_window_violations'),
                 nn: formatSol(solutions.nn, 'time_window_violations'),
-                ga: formatSol(solutions.ga, 'time_window_violations'),
+                ga: formatSol(gaSolution, 'time_window_violations'),
               }} />
               <KPIRow label="Unassigned" values={{
                 random: String(solutions.random?.unassigned_packages?.length ?? '—'),
                 nn: String(solutions.nn?.unassigned_packages?.length ?? '—'),
-                ga: String(solutions.ga?.unassigned_packages?.length ?? '—'),
+                ga: String(gaSolution?.unassigned_packages?.length ?? '—'),
               }} />
               <KPIRow label="MC Success" values={{
                 random: mc(solutions.random),
                 nn: mc(solutions.nn),
-                ga: mc(solutions.ga),
+                ga: mc(gaSolution),
               }} />
               <KPIRow label="Fitness" values={{
                 random: solutions.random ? solutions.random.fitness.toFixed(0) : '—',
                 nn: solutions.nn ? solutions.nn.fitness.toFixed(0) : '—',
-                ga: solutions.ga ? solutions.ga.fitness.toFixed(0) : '—',
+                ga: gaSolution ? gaSolution.fitness.toFixed(0) : '—',
               }} />
               <KPIRow label="Compute (s)" values={{
                 random: solutions.random?.metadata?.compute_time_seconds != null
                   ? Number(solutions.random.metadata.compute_time_seconds).toFixed(3) : '—',
                 nn: solutions.nn?.metadata?.compute_time_seconds != null
                   ? Number(solutions.nn.metadata.compute_time_seconds).toFixed(3) : '—',
-                ga: solutions.ga?.metadata?.compute_time_seconds != null
-                  ? Number(solutions.ga.metadata.compute_time_seconds).toFixed(2) : '—',
+                ga: gaSolution?.metadata?.compute_time_seconds != null
+                  ? Number(gaSolution.metadata.compute_time_seconds).toFixed(2)
+                  : isLiveGA ? '...' : '—',
               }} />
             </tbody>
           </table>

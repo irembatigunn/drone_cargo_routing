@@ -4,6 +4,7 @@ Optimization API — REST endpoints for Random/NN and WebSocket for GA streaming
 from __future__ import annotations
 
 import asyncio
+import concurrent.futures
 import json
 import uuid
 from typing import Optional
@@ -131,37 +132,31 @@ async def websocket_ga(websocket: WebSocket, run_id: str):
 
     cancelled = False
 
+    # Start cancel listener as a background task
     async def listen_for_cancel():
         nonlocal cancelled
         try:
             while True:
-                msg = await asyncio.wait_for(websocket.receive_json(), timeout=0.1)
-                if msg.get("type") == "cancel":
+                data = await asyncio.wait_for(websocket.receive_json(), timeout=0.1)
+                if data.get("type") == "cancel":
                     cancelled = True
                     return
         except (asyncio.TimeoutError, WebSocketDisconnect):
             pass
 
+    cancel_task = asyncio.create_task(listen_for_cancel())
+
+    executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
+
     try:
-        # Run GA in thread pool to not block event loop
-        loop = asyncio.get_event_loop()
+        loop = asyncio.get_running_loop()
 
-        def _run_ga_sync():
-            gen_data = []
-            for msg in run_ga(scenario, dist_matrix, config, weights):
-                gen_data.append(msg)
-            return gen_data
-
-        # We'll run synchronously but yield to event loop between chunks
-        # For true async streaming, run in thread
-        import concurrent.futures
-        executor = concurrent.futures.ThreadPoolExecutor(max_workers=1)
-
-        # Collect all generations and stream
         all_messages = []
 
         def ga_worker():
             for msg in run_ga(scenario, dist_matrix, config, weights):
+                if cancelled:
+                    break
                 all_messages.append(msg)
 
         future = loop.run_in_executor(executor, ga_worker)
@@ -169,7 +164,6 @@ async def websocket_ga(websocket: WebSocket, run_id: str):
         sent_count = 0
         while not future.done():
             await asyncio.sleep(0.05)
-            # Send any new messages
             while sent_count < len(all_messages):
                 if cancelled:
                     break
@@ -194,7 +188,7 @@ async def websocket_ga(websocket: WebSocket, run_id: str):
             if cancelled:
                 break
 
-        # Drain remaining
+        # Drain remaining messages
         if not cancelled:
             await future
             while sent_count < len(all_messages):
@@ -232,6 +226,8 @@ async def websocket_ga(websocket: WebSocket, run_id: str):
             pass
         run["status"] = "error"
     finally:
+        cancel_task.cancel()
+        executor.shutdown(wait=False)
         try:
             await websocket.close()
         except Exception:

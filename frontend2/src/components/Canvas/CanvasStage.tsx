@@ -90,7 +90,7 @@ export function CanvasStage({ width, height }: Props) {
         y={stagePos.y}
         onDragEnd={(e) => setStagePos({ x: e.target.x(), y: e.target.y() })}
       >
-        {/* Layer 1: Background grid */}
+        {/* Layer 1: Background grid + No-fly zones */}
         <Layer>
           {Array.from({ length: 11 }, (_, i) => (
             <React.Fragment key={`grid-${i}`}>
@@ -108,10 +108,6 @@ export function CanvasStage({ width, height }: Props) {
           ))}
           <Rect x={0} y={0} width={width} height={height}
             stroke="rgba(255,255,255,0.15)" strokeWidth={1} fill="transparent" />
-        </Layer>
-
-        {/* Layer 2: No-fly zones */}
-        <Layer>
           {scenario.no_fly_zones.map((zone) => {
             const flatPoints = zone.polygon.flatMap(v => [v.x * scaleX, v.y * scaleY])
             return (
@@ -143,7 +139,7 @@ export function CanvasStage({ width, height }: Props) {
           })}
         </Layer>
 
-        {/* Layer 3: Visibility graph (toggleable) */}
+        {/* Layer 2: Visibility graph (toggleable) */}
         {visualization.showVisibilityGraph && (
           <Layer>
             {visibilityEdges.slice(0, 500).map((edge, i) => (
@@ -157,7 +153,7 @@ export function CanvasStage({ width, height }: Props) {
           </Layer>
         )}
 
-        {/* Layer 4: Routes */}
+        {/* Layer 3: Routes */}
         {activeSolution && (
           <Layer>
             {activeSolution.routes.map((route, di) => {
@@ -238,7 +234,7 @@ export function CanvasStage({ width, height }: Props) {
           </Layer>
         )}
 
-        {/* Layer 5: Delivery points */}
+        {/* Layer 5: Delivery points + Depot */}
         <Layer>
           {scenario.delivery_points.map((dp) => {
             const [sx, sy] = scalePos(dp.position, scaleX, scaleY)
@@ -300,10 +296,7 @@ export function CanvasStage({ width, height }: Props) {
               </Group>
             )
           })}
-        </Layer>
-
-        {/* Layer 6: Depot */}
-        <Layer>
+          {/* Depot marker */}
           <Star
             x={depotScreen[0]}
             y={depotScreen[1]}
@@ -324,7 +317,7 @@ export function CanvasStage({ width, height }: Props) {
           />
         </Layer>
 
-        {/* Layer 7: Drone agents (animation) */}
+        {/* Layer 6: Drone agents (animation) */}
         {animation.isPlaying && (
           <Layer>
             {Object.entries(animation.dronePositions).map(([droneId, pos], di) => {
